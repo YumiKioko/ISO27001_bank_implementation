@@ -1,6 +1,3 @@
-# ISO27001_bank_implementation
-ISO 27001 Information Security Management System Implementation
-
 # ISO27001 Bank Implementation POC
 
 > ⚠️ **Disclaimer:** This is a **Proof of Concept (POC)** for demonstration purposes only.  
