@@ -1,0 +1,1966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISO 27001 Implementation Plan - Metropolitan Trust Bank</title>
+    <style>
+        :root {
+            --primary-black: #1a1a1a;
+            --secondary-black: #2d2d2d;
+            --tertiary-black: #404040;
+            --light-gray: #f5f5f5;
+            --medium-gray: #e0e0e0;
+            --dark-gray: #666666;
+            --white: #ffffff;
+            --accent-gray: #8a8a8a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--primary-black);
+            background: linear-gradient(135deg, var(--light-gray) 0%, var(--white) 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: var(--white);
+            box-shadow: 0 0 30px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 0;
+            border-bottom: 3px solid var(--primary-black);
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, var(--primary-black) 0%, var(--secondary-black) 100%);
+            color: var(--white);
+            border-radius: 8px 8px 0 0;
+            margin: -20px -20px 30px -20px;
+            padding: 40px 20px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .header .subtitle {
+            font-size: 1.2em;
+            color: var(--medium-gray);
+            margin-bottom: 20px;
+        }
+
+        .document-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .document-info div {
+            text-align: left;
+        }
+
+        .document-info strong {
+            display: block;
+            color: var(--medium-gray);
+            font-size: 0.9em;
+        }
+
+        .toc {
+            background: var(--light-gray);
+            padding: 30px;
+            border-radius: 8px;
+            margin: 30px 0;
+            border-left: 5px solid var(--primary-black);
+        }
+
+        .toc h2 {
+            color: var(--primary-black);
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .toc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+        }
+
+        .toc a {
+            display: block;
+            padding: 12px 15px;
+            background: var(--white);
+            color: var(--primary-black);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            font-weight: 500;
+        }
+
+        .toc a:hover {
+            background: var(--primary-black);
+            color: var(--white);
+            transform: translateX(5px);
+            border-color: var(--primary-black);
+        }
+
+        .section {
+            margin: 40px 0;
+            padding: 30px;
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--secondary-black);
+        }
+
+        .section h2 {
+            color: var(--primary-black);
+            margin-bottom: 25px;
+            font-size: 2em;
+            border-bottom: 2px solid var(--medium-gray);
+            padding-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section h3 {
+            color: var(--secondary-black);
+            margin: 25px 0 15px 0;
+            font-size: 1.4em;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .section h3:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 10px;
+            height: 2px;
+            background: var(--primary-black);
+        }
+
+        .section h4 {
+            color: var(--tertiary-black);
+            margin: 20px 0 10px 0;
+            font-size: 1.2em;
+            font-weight: 600;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--white);
+            font-size: 0.95em;
+        }
+
+        th {
+            background: var(--primary-black);
+            color: var(--white);
+            padding: 15px 12px;
+            text-align: left;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.85em;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid var(--medium-gray);
+            vertical-align: top;
+        }
+
+        tr:nth-child(even) {
+            background: var(--light-gray);
+        }
+
+        tr:hover {
+            background: rgba(42, 42, 42, 0.05);
+        }
+
+        .highlight-box {
+            background: var(--light-gray);
+            border: 2px solid var(--medium-gray);
+            border-radius: 8px;
+            padding: 25px;
+            margin: 25px 0;
+            position: relative;
+        }
+
+        .highlight-box:before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            height: 4px;
+            background: var(--primary-black);
+            border-radius: 8px 8px 0 0;
+        }
+
+        .code-block {
+            background: var(--primary-black);
+            color: var(--light-gray);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            overflow-x: auto;
+            border: 2px solid var(--secondary-black);
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .metric-card {
+            background: var(--white);
+            border: 2px solid var(--medium-gray);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .metric-card:hover {
+            border-color: var(--primary-black);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .metric-card h4 {
+            color: var(--primary-black);
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .metric-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: var(--secondary-black);
+            margin: 10px 0;
+        }
+
+        .metric-description {
+            color: var(--dark-gray);
+            font-size: 0.9em;
+        }
+
+        .phase-timeline {
+            position: relative;
+            padding-left: 30px;
+            margin: 30px 0;
+        }
+
+        .phase-timeline:before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--primary-black);
+        }
+
+        .phase-item {
+            position: relative;
+            margin: 30px 0;
+            background: var(--light-gray);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 5px solid var(--secondary-black);
+        }
+
+        .phase-item:before {
+            content: '';
+            position: absolute;
+            left: -22px;
+            top: 25px;
+            width: 12px;
+            height: 12px;
+            background: var(--primary-black);
+            border-radius: 50%;
+            border: 3px solid var(--white);
+        }
+
+        .phase-title {
+            font-weight: bold;
+            color: var(--primary-black);
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .phase-duration {
+            color: var(--dark-gray);
+            font-style: italic;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+
+        .risk-matrix {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 2px;
+            margin: 20px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .risk-cell {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: bold;
+            font-size: 0.8em;
+        }
+
+        .risk-header {
+            background: var(--primary-black);
+        }
+
+        .risk-low { background: var(--medium-gray); color: var(--primary-black); }
+        .risk-medium { background: var(--dark-gray); }
+        .risk-high { background: var(--tertiary-black); }
+        .risk-critical { background: var(--primary-black); }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+            border-top: 3px solid var(--primary-black);
+            background: var(--light-gray);
+            color: var(--dark-gray);
+            border-radius: 0 0 8px 8px;
+            margin-left: -20px;
+            margin-right: -20px;
+            margin-bottom: -20px;
+        }
+
+        .footer p {
+            margin: 5px 0;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .status-green { background: #28a745; }
+        .status-amber { background: #ffc107; }
+        .status-red { background: #dc3545; }
+
+        .budget-summary {
+            background: var(--primary-black);
+            color: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+
+        .budget-summary h3 {
+            color: var(--white);
+            margin-bottom: 20px;
+            padding-left: 0;
+        }
+
+        .budget-summary h3:before {
+            background: var(--white);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .toc-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+            
+            .table-container {
+                font-size: 0.8em;
+            }
+        }
+
+        .control-status {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .status-implemented {
+            background: #28a745;
+            color: white;
+        }
+
+        .status-partial {
+            background: #ffc107;
+            color: #212529;
+        }
+
+        .status-not-implemented {
+            background: #dc3545;
+            color: white;
+        }
+
+        .status-in-progress {
+            background: #17a2b8;
+            color: white;
+        }
+
+        .expandable {
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .expandable:hover {
+            background: rgba(0,0,0,0.02);
+        }
+
+        .expandable-content {
+            display: none;
+            padding-top: 15px;
+            border-top: 1px solid var(--medium-gray);
+            margin-top: 15px;
+        }
+
+        .expandable.expanded .expandable-content {
+            display: block;
+        }
+
+        .expand-indicator {
+            float: right;
+            transition: transform 0.3s ease;
+        }
+
+        .expandable.expanded .expand-indicator {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>ISO 27001 Implementation Plan</h1>
+            <div class="subtitle">Information Security Management System</div>
+            <div class="subtitle">Metropolitan Trust Bank</div>
+            
+            <div class="document-info">
+                <div><strong>Document Version:</strong> 1.0</div>
+                <div><strong>Approval Date:</strong> September 5, 2025</div>
+                <div><strong>Next Review:</strong> September 5, 2026</div>
+                <div><strong>Owner:</strong> Chief Information Security Officer</div>
+                <div><strong>Classification:</strong> Internal Use Only</div>
+                <div><strong>Total Investment:</strong> $5,325,000</div>
+            </div>
+        </header>
+
+        <div class="toc">
+            <h2>Table of Contents</h2>
+            <div class="toc-grid">
+                <a href="#executive-summary">Executive Summary</a>
+                <a href="#project-overview">Project Overview</a>
+                <a href="#scope-definition">Scope Definition</a>
+                <a href="#gap-analysis">Gap Analysis</a>
+                <a href="#implementation-roadmap">Implementation Roadmap</a>
+                <a href="#policy-framework">Policy Framework</a>
+                <a href="#risk-management">Risk Management</a>
+                <a href="#statement-applicability">Statement of Applicability</a>
+                <a href="#control-implementation">Control Implementation</a>
+                <a href="#training-awareness">Training & Awareness</a>
+                <a href="#monitoring-measurement">Monitoring & Measurement</a>
+                <a href="#internal-audit">Internal Audit Program</a>
+                <a href="#management-review">Management Review</a>
+                <a href="#incident-response">Incident Response</a>
+                <a href="#business-continuity">Business Continuity</a>
+                <a href="#vendor-management">Vendor Management</a>
+                <a href="#budget-resources">Budget & Resources</a>
+                <a href="#timeline-milestones">Timeline & Milestones</a>
+            </div>
+        </div>
+
+        <section id="executive-summary" class="section">
+            <h2>1. Executive Summary</h2>
+            
+            <div class="highlight-box">
+                <h3>Strategic Initiative Overview</h3>
+                <p>Metropolitan Trust Bank is implementing ISO 27001:2022 to establish a robust Information Security Management System (ISMS) that protects customer data, ensures regulatory compliance, and maintains operational resilience. This comprehensive implementation covers all critical banking operations including digital banking platforms, payment processing systems, core banking applications, and supporting infrastructure.</p>
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <h4>Total Investment</h4>
+                    <div class="metric-value">$5.3M</div>
+                    <div class="metric-description">18-month implementation</div>
+                </div>
+                <div class="metric-card">
+                    <h4>Expected ROI</h4>
+                    <div class="metric-value">62.9%</div>
+                    <div class="metric-description">5-year return on investment</div>
+                </div>
+                <div class="metric-card">
+                    <h4>Risk Reduction</h4>
+                    <div class="metric-value">40%</div>
+                    <div class="metric-description">Target incident reduction</div>
+                </div>
+                <div class="metric-card">
+                    <h4>Payback Period</h4>
+                    <div class="metric-value">2.8</div>
+                    <div class="metric-description">Years to break even</div>
+                </div>
+            </div>
+
+            <h3>Business Drivers</h3>
+            <ul>
+                <li><strong>Regulatory Compliance:</strong> PCI DSS, SOX, Basel III, GDPR, regional banking regulations</li>
+                <li><strong>Customer Trust:</strong> Protecting sensitive financial data and maintaining service availability</li>
+                <li><strong>Competitive Advantage:</strong> Demonstrating security maturity to stakeholders and partners</li>
+                <li><strong>Risk Mitigation:</strong> Proactive approach to cybersecurity threats in the financial sector</li>
+                <li><strong>Operational Excellence:</strong> Standardized security processes and continuous improvement</li>
+            </ul>
+
+            <h3>Key Benefits Expected</h3>
+            <ul>
+                <li>Reduced security incidents by 40% within 12 months</li>
+                <li>Enhanced regulatory audit readiness</li>
+                <li>Improved incident response times (target: &lt;30 minutes for critical incidents)</li>
+                <li>Standardized security practices across all business units</li>
+                <li>Enhanced customer confidence and market reputation</li>
+            </ul>
+        </section>
+
+        <section id="project-overview" class="section">
+            <h2>2. Project Overview</h2>
+
+            <h3>Project Objectives</h3>
+            <div class="highlight-box">
+                <ol>
+                    <li><strong>Establish ISMS:</strong> Implement comprehensive information security management system</li>
+                    <li><strong>Achieve Certification:</strong> Obtain ISO 27001:2022 certification within 18 months</li>
+                    <li><strong>Enhance Security Posture:</strong> Strengthen overall cybersecurity resilience</li>
+                    <li><strong>Ensure Compliance:</strong> Maintain adherence to all applicable regulations</li>
+                    <li><strong>Cultural Transformation:</strong> Embed security awareness throughout the organization</li>
+                </ol>
+            </div>
+
+            <h3>Project Governance Structure</h3>
+            
+            <h4>Executive Steering Committee</h4>
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>Role</th>
+                        <th>Responsibility</th>
+                        <th>Meeting Frequency</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Chair:</strong> Chief Executive Officer</td>
+                        <td>Strategic oversight and final decision authority</td>
+                        <td rowspan="5">Monthly</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CTO:</strong> Technology strategy alignment</td>
+                        <td>Technical feasibility and resource coordination</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CISO:</strong> Security leadership</td>
+                        <td>ISMS design and implementation oversight</td>
+                    </tr>
+                    <tr>
+                        <td><strong>COO:</strong> Operations integration</td>
+                        <td>Business process integration and change management</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Chief Risk Officer:</strong> Risk alignment</td>
+                        <td>Enterprise risk management integration</td>
+                    </tr>
+                </table>
+            </div>
+
+            <h4>ISMS Implementation Team</h4>
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>Role</th>
+                        <th>FTE</th>
+                        <th>Duration</th>
+                        <th>Key Responsibilities</th>
+                    </tr>
+                    <tr>
+                        <td>Project Manager</td>
+                        <td>1.0</td>
+                        <td>18 months</td>
+                        <td>Overall project coordination and delivery</td>
+                    </tr>
+                    <tr>
+                        <td>Security Specialists</td>
+                        <td>4.0</td>
+                        <td>18 months</td>
+                        <td>Control implementation and technical design</td>
+                    </tr>
+                    <tr>
+                        <td>IT Representatives</td>
+                        <td>2.0</td>
+                        <td>12 months</td>
+                        <td>Infrastructure and systems integration</td>
+                    </tr>
+                    <tr>
+                        <td>Business Representatives</td>
+                        <td>2.0</td>
+                        <td>12 months</td>
+                        <td>Process design and change management</td>
+                    </tr>
+                    <tr>
+                        <td>External Consultants</td>
+                        <td>2.0</td>
+                        <td>12 months</td>
+                        <td>ISO 27001 expertise and guidance</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <section id="scope-definition" class="section">
+            <h2>3. Scope Definition</h2>
+
+            <div class="highlight-box">
+                <h3>ISMS Scope Statement</h3>
+                <p>The Information Security Management System applies to all information processing facilities, systems, and services that support Metropolitan Trust Bank's core banking operations, including digital banking platforms, payment processing, customer data management, and supporting infrastructure across all physical locations and remote operations.</p>
+            </div>
+
+            <h3>Physical Locations</h3>
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>Location Type</th>
+                        <th>Details</th>
+                        <th>Security Scope</th>
+                    </tr>
+                    <tr>
+                        <td>Headquarters</td>
+                        <td>123 Financial District, Metropolitan City</td>
+                        <td>Full ISMS coverage including executive offices, IT operations</td>
+                    </tr>
+                    <tr>
+                        <td>Data Centers</td>
+                        <td>Primary (Metro DC1) and Secondary (Metro DC2)</td>
+                        <td>Critical infrastructure protection, physical and logical controls</td>
+                    </tr>
+                    <tr>
+                        <td>Branch Network</td>
+                        <td>45 retail branches across the region</td>
+                        <td>Customer-facing systems, local workstations, physical security</td>
+                    </tr>
+                    <tr>
+                        <td>Operations Centers</td>
+                        <td>Customer service, loan processing, compliance</td>
+                        <td>Operational systems, data handling procedures</td>
+                    </tr>
+                    <tr>
+                        <td>Remote Infrastructure</td>
+                        <td>VPN, cloud services, mobile device management</td>
+                        <td>Secure remote access, cloud security controls</td>
+                    </tr>
+                </table>
+            </div>
+
+            <h3>Information Systems in Scope</h3>
+            <ul>
+                <li><strong>Core Banking System:</strong> Temenos T24 platform - customer accounts, transactions, regulatory reporting</li>
+                <li><strong>Digital Banking:</strong> Online and mobile banking applications - customer self-service, digital transactions</li>
+                <li><strong>Payment Processing:</strong> SWIFT network, ACH processing, card systems - domestic and international payments</li>
+                <li><strong>Customer Relationship Management:</strong> Salesforce Financial Services Cloud - customer data and interactions</li>
+                <li><strong>Risk Management Systems:</strong> GRC platform, fraud detection systems - compliance and risk monitoring</li>
+                <li><strong>Supporting Infrastructure:</strong> Active Directory, email systems, backup solutions - foundational IT services</li>
+            </ul>
+
+            <h3>Business Processes Covered</h3>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <h4>Customer Operations</h4>
+                    <div class="metric-description">Account management, transactions, digital banking services</div>
+                </div>
+                <div class="metric-card">
+                    <h4>Financial Services</h4>
+                    <div class="metric-description">Loan origination, investment advisory, payment processing</div>
+                </div>
+                <div class="metric-card">
+                    <h4>Risk & Compliance</h4>
+                    <div class="metric-description">Regulatory reporting, risk management, audit processes</div>
+                </div>
+                <div class="metric-card">
+                    <h4>Operations Support</h4>
+                    <div class="metric-description">HR management, vendor relations, facility operations</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="gap-analysis" class="section">
+            <h2>4. Gap Analysis</h2>
+
+            <h3>Current State Assessment</h3>
+            
+            <div class="highlight-box">
+                <h4>Existing Security Controls - Strengths</h4>
+                <ul>
+                    <li>Established incident response procedures</li>
+                    <li>Regular security awareness training</li>
+                    <li>Network segmentation and monitoring</li>
+                    <li>Backup and recovery procedures</li>
+                    <li>Vendor security assessments</li>
+                    <li>Penetration testing program</li>
+                </ul>
+            </div>
+
+            <h4>Identified Gaps</h4>
+            <ul>
+                <li>Lack of formal ISMS framework</li>
+                <li>Inconsistent risk assessment methodology</li>
+                <li>Limited security metrics and reporting</li>
+                <li>Incomplete asset inventory</li>
+                <li>Insufficient access control documentation</li>
+                <li>Ad-hoc security policy management</li>
+            </ul>
+
+            <h3>ISO 27001 Control Assessment Summary</h3>
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>Control Category</th>
+                        <th>Total</th>
+                        <th>Implemented</th>
+                        <th>Partial</th>
+                        <th>Not Implemented</th>
+                        <th>Gap Score</th>
+                    </tr>
+                    <tr>
+                        <td>A.5 Information Security Policies</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>50%</td>
+                    </tr>
+                    <tr>
+                        <td>A.6 Organization of Information Security</td>
+                        <td>8</td>
+                        <td>4</td>
+                        <td>3</td>
+                        <td>1</td>
+                        <td>69%</td>
+                    </tr>
+                    <tr>
+                        <td>A.7 Human Resource Security</td>
+                        <td>6</td>
+                        <td>3</td>
+                        <td>2</td>
+                        <td>1</td>
+                        <td>67%</td>
+                    </tr>
+                    <tr>
+                        <td>A.8 Asset Management</td>
+                        <td>14</td>
+                        <td>6</td>
+                        <td>5</td>
+                        <td>3</td>
+                        <td>57%</td>
+                    </tr>
+                    <tr>
+                        <td>A.9 Access Control</td>
+                        <td>21</td>
+                        <td>10</td>
+                        <td>8</td>
+                        <td>3</td>
+                        <td>67%</td>
+                    </tr>
+                    <tr>
+                        <td>A.10 Cryptography</td>
+                        <td>2</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>75%</td>
+                    </tr>
+                    <tr>
+                        <td>A.11 Physical and Environmental Security</td>
+                        <td>15</td>
+                        <td>8</td>
+                        <td>5</td>
+                        <td>2</td>
+                        <td>70%</td>
+                    </tr>
+                    <tr>
+                        <td>A.12 Operations Security</td>
+                        <td>14</td>
+                        <td>7</td>
+                        <td>5</td>
+                        <td>2</td>
+                        <td>68%</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="budget-summary">
+                <h3>Overall Gap Assessment</h3>
+                <div class="metrics-grid">
+                    <div class="metric-card" style="background: var(--secondary-black); color: var(--white);">
+                        <h4>Current Maturity</h4>
+                        <div class="metric-value">67%</div>
+                        <div class="metric-description">Overall control implementation</div>
+                    </div>
+                    <div class="metric-card" style="background: var(--tertiary-black); color: var(--white);">
+                        <h4>Priority Areas</h4>
+                        <div class="metric-value">5</div>
+                        <div class="metric-description">High-priority control domains</div>
+                    </div>
+                    <div class="metric-card" style="background: var(--primary-black); color: var(--white);">
+                        <h4>Implementation Effort</h4>
+                        <div class="metric-value">18</div>
+                        <div class="metric-description">Months to certification</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="implementation-roadmap" class="section">
+            <h2>5. Implementation Roadmap</h2>
+
+            <div class="phase-timeline">
+                <div class="phase-item">
+                    <div class="phase-title">Phase 1: Foundation (Months 1-6)</div>
+                    <div class="phase-duration">Establish ISMS foundation, governance, and critical policies</div>
+                    <p><strong>Key Deliverables:</strong></p>
+                    <ul>
+                        <li>ISMS scope definition and approval</li>
+                        <li>Information Security Policy development</li>
+                        <li>Asset inventory and classification</li>
+                        <li>Risk assessment execution</li>
+                        <li>Statement of Applicability development</li>
+                        <li>Security awareness program launch</li>
+                    </ul>
+                </div>
+
+                <div class="phase-item">
+                    <div class="phase-title">Phase 2: Implementation (Months 7-12)</div>
+                    <div class="phase-duration">Implement security controls and operational procedures</div>
+                    <p><strong>Key Deliverables:</strong></p>
+                    <ul>
+                        <li>Access control framework implementation</li>
+                        <li>Physical security enhancements</li>
+                        <li>Incident response procedure updates</li>
+                        <li>Operational security procedures</li>
+                        <li>Business continuity integration</li>
+                        <li>Control effectiveness testing</li>
+                    </ul>
+                </div>
+
+                <div class="phase-item">
+                    <div class="phase-title">Phase 3: Certification (Months 13-18)</div>
+                    <div class="phase-duration">Achieve ISO 27001 certification and continuous improvement</div>
+                    <p><strong>Key Deliverables:</strong></p>
+                    <ul>
+                        <li>Internal audit program execution</li>
+                        <li>Management review and optimization</li>
+                        <li>Stage 1 and Stage 2 certification audits</li>
+                        <li>Certificate issuance</li>
+                        <li>Continuous improvement planning</li>
+                        <li>Operational transition</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="policy-framework" class="section">
+            <h2>6. Information Security Policy Framework</h2>
+
+            <h3>Policy Hierarchy Structure</h3>
+            
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>Level</th>
+                        <th>Policy Type</th>
+                        <th>Approval Authority</th>
+                        <th>Review Frequency</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Master Information Security Policy</td>
+                        <td>Board of Directors</td>
+                        <td>Annual</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Domain-Specific Policies (8 policies)</td>
+                        <td>Executive Committee</td>
+                        <td>Bi-annual</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Procedures and Guidelines</td>
+                        <td>Department Heads</td>
+                        <td>Annual</td>
+                    </tr>
+                </table>
+            </div>
+
+            <h3>Level 2 Domain-Specific Policies</h3>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <h4>Access Control Policy</h4>
+                    <div class="metric-description">Identity management, authentication, authorization procedures</div>
+                </div>
+                <div class="metric-card">
+                    <h4>Asset Management Policy</h4>
+                    <div class="metric-description">Asset inventory, classification, handling requirements</div>
+                </div>
+                <div class="metric-card">
+                    <h4>Incident Response Policy</h4>
+                    <div class="metric-description">Detection, response, recovery, and lessons learned</div>
+                </div>
+                <div class="metric-card">
+                    <h4>Business Continuity Policy</h4>
+                    <div class="metric-description">Continuity planning, disaster recovery, resilience</div>
+                </div>
+                <div class="metric-card">
+                    <h4>Vendor Management Policy</h4>
+                    <div class="metric-description">Third-party risk assessment and ongoing monitoring</div>
+                </div>
+                <div class="metric-card">
+                    <h4>Data Classification Policy</h4>
+                    <div class="metric-description">Information handling, retention, and disposal</div>
+                </div>
+                <div class="metric-card">
+                    <h4>Physical Security Policy</h4>
+                    <div class="metric-description">Facility access, environmental controls, equipment protection</div>
+                </div>
+                <div class="metric-card">
+                    <h4>HR Security Policy</h4>
+                    <div class="metric-description">Personnel screening, training, termination procedures</div>
+                </div>
+            </div>
+
+            <h3>Information Security Objectives</h3>
+            <div class="highlight-box">
+                <ol>
+                    <li><strong>Confidentiality:</strong> Ensure information is accessible only to authorized individuals</li>
+                    <li><strong>Integrity:</strong> Maintain accuracy and completeness of information and processing methods</li>
+                    <li><strong>Availability:</strong> Ensure authorized users have access to information when needed</li>
+                    <li><strong>Compliance:</strong> Adhere to all applicable laws, regulations, and contractual requirements</li>
+                    <li><strong>Continuous Improvement:</strong> Regularly enhance security posture through monitoring and assessment</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="risk-management" class="section">
+            <h2>7. Risk Management Framework</h2>
+
+            <h3>Risk Assessment Process</h3>
+            <div class="phase-timeline">
+                <div class="phase-item">
+                    <div class="phase-title">Step 1: Asset Identification and Valuation</div>
+                    <p>Comprehensive inventory and valuation of information, physical, human, and intangible assets</p>
+                </div>
+                <div class="phase-item">
+                    <div class="phase-title">Step 2: Threat Identification</div>
+                    <p>Analysis of external threats, internal threats, environmental threats, and technical threats</p>
+                </div>
+                <div class="phase-item">
+                    <div class="phase-title">Step 3: Vulnerability Assessment</div>
+                    <p>Technical, physical, organizational, and personnel vulnerability identification</p>
+                </div>
+                <div class="phase-item">
+                    <div class="phase-title">Step 4: Risk Analysis and Evaluation</div>
+                    <p>Likelihood and impact assessment with risk rating calculation and tolerance comparison</p>
+                </div>
+            </div>
+
+            <h3>Risk Rating Scale</h3>
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>Impact Level</th>
+                        <th>Financial Loss</th>
+                        <th>Operational Disruption</th>
+                        <th>Regulatory Impact</th>
+                        <th>Reputation Damage</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Severe (5)</strong></td>
+                        <td>&gt;$10M</td>
+                        <td>&gt;24 hours critical outage</td>
+                        <td>Major regulatory sanctions</td>
+                        <td>National media coverage</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Major (4)</strong></td>
+                        <td>$1M-$10M</td>
+                        <td>8-24 hours critical outage</td>
+                        <td>Regulatory fines</td>
+                        <td>Regional media coverage</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Moderate (3)</strong></td>
+                        <td>$100K-$1M</td>
+                        <td>2-8 hours disruption</td>
+                        <td>Regulatory warnings</td>
+                        <td>Industry media coverage</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Minor (2)</strong></td>
+                        <td>$10K-$100K</td>
+                        <td>&lt;2 hours disruption</td>
+                        <td>Minor compliance issues</td>
+                        <td>Limited public awareness</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Negligible (1)</strong></td>
+                        <td>&lt;$10K</td>
+                        <td>No significant disruption</td>
+                        <td>No regulatory impact</td>
+                        <td>No public impact</td>
+                    </tr>
+                </table>
+            </div>
+
+            <h3>Key Risk Scenarios</h3>
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>Risk Scenario</th>
+                        <th>Threat</th>
+                        <th>Vulnerability</th>
+                        <th>Impact</th>
+                        <th>Controls</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Data Breach</strong></td>
+                        <td>External hackers</td>
+                        <td>Unpatched systems</td>
+                        <td>Regulatory fines, reputation damage</td>
+                        <td>Firewall, IDS, patch management</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Insider Threat</strong></td>
+                        <td>Malicious employee</td>
+                        <td>Excessive privileges</td>
+                        <td>Data theft, fraud</td>
+                        <td>Access controls, monitoring</td>
+                    </tr>
+                    <tr>
+                        <td><strong>System Outage</strong></td>
+                        <td>Hardware failure</td>
+                        <td>Single points of failure</td>
+                        <td>Service disruption</td>
+                        <td>Redundancy, disaster recovery</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Third-Party Risk</strong></td>
+                        <td>Vendor security incident</td>
+                        <td>Inadequate oversight</td>
+                        <td>Service disruption, compliance</td>
+                        <td>Due diligence, monitoring</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <section id="statement-applicability" class="section">
+            <h2>8. Statement of Applicability</h2>
+
+            <h3>Control Selection Methodology</h3>
+            <div class="highlight-box">
+                <p>Controls are selected based on:</p>
+                <ul>
+                    <li><strong>Risk Assessment Results:</strong> Address identified high and medium risks</li>
+                    <li><strong>Legal and Regulatory Requirements:</strong> Mandatory compliance obligations</li>
+                    <li><strong>Contractual Obligations:</strong> Customer and partner security requirements</li>
+                    <li><strong>Business Requirements:</strong> Operational and strategic security needs</li>
+                    <li><strong>Industry Best Practices:</strong> Banking sector security standards</li>
+                </ul>
+            </div>
+
+            <h3>Key Control Categories Implementation Status</h3>
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>Control Category</th>
+                        <th>Applicable</th>
+                        <th>Status</th>
+                        <th>Priority</th>
+                        <th>Target Date</th>
+                    </tr>
+                    <tr>
+                        <td>A.5 Information Security Policies</td>
+                        <td>Yes</td>
+                        <td><span class="control-status status-in-progress">In Progress</span></td>
+                        <td>High</td>
+                        <td>Q1 2026</td>
+                    </tr>
+                    <tr>
+                        <td>A.6 Organization of Information Security</td>
+                        <td>Yes</td>
+                        <td><span class="control-status status-implemented">Implemented</span></td>
+                        <td>High</td>
+                        <td>Complete</td>
+                    </tr>
+                    <tr>
+                        <td>A.7 Human Resource Security</td>
+                        <td>Yes</td>
+                        <td><span class="control-status status-implemented">Implemented</span></td>
+                        <td>Medium</td>
+                        <td>Complete</td>
+                    </tr>
+                    <tr>
+                        <td>A.8 Asset Management</td>
+                        <td>Yes</td>
+                        <td><span class="control-status status-in-progress">In Progress</span></td>
+                        <td>High</td>
+                        <td>Q2 2026</td>
+                    </tr>
+                    <tr>
+                        <td>A.9 Access Control</td>
+                        <td>Yes</td>
+                        <td><span class="control-status status-partial">Partial</span></td>
+                        <td>High</td>
+                        <td>Q2 2026</td>
+                    </tr>
+                    <tr>
+                        <td>A.10 Cryptography</td>
+                        <td>Yes</td>
+                        <td><span class="control-status status-implemented">Implemented</span></td>
+                        <td>Medium</td>
+                        <td>Complete</td>
+                    </tr>
+                    <tr>
+                        <td>A.11 Physical and Environmental Security</td>
+                        <td>Yes</td>
+                        <td><span class="control-status status-implemented">Implemented</span></td>
+                        <td>Medium</td>
+                        <td>Complete</td>
+                    </tr>
+                    <tr>
+                        <td>A.12 Operations Security</td>
+                        <td>Yes</td>
+                        <td><span class="control-status status-partial">Partial</span></td>
+                        <td>High</td>
+                        <td>Q2 2026</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <section id="training-awareness" class="section">
+            <h2>10. Training and Awareness Program</h2>
+
+            <h3>Target Audiences</h3>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <h4>Executive Leadership</h4>
+                    <div class="metric-description">Governance, compliance, risk management, investment decisions</div>
+                </div>
+                <div class="metric-card">
+                    <h4>IT and Security Staff</h4>
+                    <div class="metric-description">Technical controls, incident response, risk assessment</div>
+                </div>
+                <div class="metric-card">
+                    <h4>General Employees</h4>
+                    <div class="metric-description">Policies, phishing awareness, physical security</div>
+                </div>
+                <div class="metric-card">
+                    <h4>High-Risk Roles</h4>
+                    <div class="metric-description">Financial operations, customer service, administrators</div>
+                </div>
+            </div>
+
+            <h3>Training Program Structure</h3>
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>Module</th>
+                        <th>Duration</th>
+                        <th>Target Audience</th>
+                        <th>Frequency</th>
+                        <th>Delivery Method</th>
+                    </tr>
+                    <tr>
+                        <td>Information Security Fundamentals</td>
+                        <td>45 minutes</td>
+                        <td>All Employees</td>
+                        <td>Annual</td>
+                        <td>Online Learning</td>
+                    </tr>
+                    <tr>
+                        <td>Cyber Threat Awareness</td>
+                        <td>30 minutes</td>
+                        <td>All Employees</td>
+                        <td>Bi-annual</td>
+                        <td>Online + Simulations</td>
+                    </tr>
+                    <tr>
+                        <td>Data Protection and Privacy</td>
+                        <td>30 minutes</td>
+                        <td>All Employees</td>
+                        <td>Annual</td>
+                        <td>Online Learning</td>
+                    </tr>
+                    <tr>
+                        <td>Banking-Specific Security</td>
+                        <td>45 minutes</td>
+                        <td>Banking Staff</td>
+                        <td>Annual</td>
+                        <td>Classroom + Online</td>
+                    </tr>
+                    <tr>
+                        <td>Technical Security Controls</td>
+                        <td>8 hours</td>
+                        <td>IT Administrators</td>
+                        <td>Annual</td>
+                        <td>Classroom + Hands-on</td>
+                    </tr>
+                    <tr>
+                        <td>Secure Development</td>
+                        <td>6 hours</td>
+                        <td>Developers</td>
+                        <td>Annual</td>
+                        <td>Workshop + Online</td>
+                    </tr>
+                </table>
+            </div>
+
+            <h3>Training Effectiveness Measurement</h3>
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>KPI</th>
+                        <th>Target</th>
+                        <th>Current</th>
+                        <th>Status</th>
+                        <th>Measurement Method</th>
+                    </tr>
+                    <tr>
+                        <td>Training completion rates</td>
+                        <td>95% within 30 days</td>
+                        <td>92%</td>
+                        <td><span class="status-indicator status-amber"></span> Amber</td>
+                        <td>Learning Management System</td>
+                    </tr>
+                    <tr>
+                        <td>Assessment scores</td>
+                        <td>80% minimum passing</td>
+                        <td>85%</td>
+                        <td><span class="status-indicator status-green"></span> Green</td>
+                        <td>Online assessment results</td>
+                    </tr>
+                    <tr>
+                        <td>Phishing simulation click rates</td>
+                        <td>&lt;10%</td>
+                        <td>8%</td>
+                        <td><span class="status-indicator status-green"></span> Green</td>
+                        <td>Phishing simulation platform</td>
+                    </tr>
+                    <tr>
+                        <td>Security incident reduction</td>
+                        <td>25% annually</td>
+                        <td>15%</td>
+                        <td><span class="status-indicator status-amber"></span> Amber</td>
+                        <td>Incident tracking system</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <section id="incident-response" class="section">
+            <h2>14. Incident Response Framework</h2>
+
+            <h3>Incident Classification</h3>
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>Severity</th>
+                        <th>Description</th>
+                        <th>Response Time</th>
+                        <th>Examples</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Critical (P1)</strong></td>
+                        <td>Customer data breach, core system compromise</td>
+                        <td>15 minutes</td>
+                        <td>Database breach, payment system outage</td>
+                    </tr>
+                    <tr>
+                        <td><strong>High (P2)</strong></td>
+                        <td>Limited data exposure, system vulnerability</td>
+                        <td>1 hour</td>
+                        <td>Malware infection, unauthorized access</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Medium (P3)</strong></td>
+                        <td>Policy violations, minor security events</td>
+                        <td>4 hours</td>
+                        <td>Failed access attempts, policy deviation</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Low (P4)</strong></td>
+                        <td>Awareness issues, informational events</td>
+                        <td>Next business day</td>
+                        <td>Training gaps, minor violations</td>
+                    </tr>
+                </table>
+            </div>
+
+            <h3>Response Team Structure</h3>
+            <div class="highlight-box">
+                <h4>Core Response Team</h4>
+                <ul>
+                    <li><strong>Incident Response Manager:</strong> Overall coordination and stakeholder communication</li>
+                    <li><strong>Technical Response Team:</strong> Security analysts, system administrators, network engineers</li>
+                    <li><strong>Business Response Team:</strong> Business representatives, legal counsel, communications</li>
+                    <li><strong>External Support:</strong> Law enforcement, regulators, forensics specialists</li>
+                </ul>
+            </div>
+
+            <h3>Response Process Phases</h3>
+            <div class="phase-timeline">
+                <div class="phase-item">
+                    <div class="phase-title">Phase 1: Preparation</div>
+                    <p>Team establishment, procedures, tools, training</p>
+                </div>
+                <div class="phase-item">
+                    <div class="phase-title">Phase 2: Detection and Analysis</div>
+                    <p>Monitoring, classification, containment, impact assessment</p>
+                </div>
+                <div class="phase-item">
+                    <div class="phase-title">Phase 3: Containment and Recovery</div>
+                    <p>Extended containment, eradication, system restoration</p>
+                </div>
+                <div class="phase-item">
+                    <div class="phase-title">Phase 4: Post-Incident</div>
+                    <p>Lessons learned, process improvement, documentation</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="budget-resources" class="section">
+            <h2>17. Implementation Budget and Resources</h2>
+
+            <h3>Total Project Investment</h3>
+            <div class="budget-summary">
+                <div class="metrics-grid">
+                    <div class="metric-card" style="background: var(--white); color: var(--primary-black); border: 2px solid var(--white);">
+                        <h4>Personnel Costs</h4>
+                        <div class="metric-value">$1.23M</div>
+                        <div class="metric-description">22.5% of total budget</div>
+                    </div>
+                    <div class="metric-card" style="background: var(--white); color: var(--primary-black); border: 2px solid var(--white);">
+                        <h4>External Services</h4>
+                        <div class="metric-value">$975K</div>
+                        <div class="metric-description">17.9% of total budget</div>
+                    </div>
+                    <div class="metric-card" style="background: var(--white); color: var(--primary-black); border: 2px solid var(--white);">
+                        <h4>Technology</h4>
+                        <div class="metric-value">$1.83M</div>
+                        <div class="metric-description">33.6% of total budget</div>
+                    </div>
+                    <div class="metric-card" style="background: var(--white); color: var(--primary-black); border: 2px solid var(--white);">
+                        <h4>Training</h4>
+                        <div class="metric-value">$390K</div>
+                        <div class="metric-description">7.2% of total budget</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Budget Breakdown by Category</h3>
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>Category</th>
+                        <th>Amount</th>
+                        <th>Percentage</th>
+                        <th>Key Components</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Personnel Costs</strong></td>
+                        <td>$1,225,000</td>
+                        <td>22.5%</td>
+                        <td>Project team, security specialists, business analysts</td>
+                    </tr>
+                    <tr>
+                        <td><strong>External Services</strong></td>
+                        <td>$975,000</td>
+                        <td>17.9%</td>
+                        <td>ISO 27001 consultants, gap analysis, certification</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Technology and Infrastructure</strong></td>
+                        <td>$1,825,000</td>
+                        <td>33.6%</td>
+                        <td>SIEM, IAM, DLP, security tools, infrastructure</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Training and Certification</strong></td>
+                        <td>$390,000</td>
+                        <td>7.2%</td>
+                        <td>Employee training, professional certifications</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Operational and Miscellaneous</strong></td>
+                        <td>$910,000</td>
+                        <td>16.7%</td>
+                        <td>Communications, documentation, contingency</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Total Project Budget</strong></td>
+                        <td><strong>$5,325,000</strong></td>
+                        <td><strong>100.0%</strong></td>
+                        <td>Complete 18-month implementation</td>
+                    </tr>
+                </table>
+            </div>
+
+            <h3>Return on Investment Analysis</h3>
+            <div class="highlight-box">
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Benefit Category</th>
+                            <th>Annual Value</th>
+                            <th>5-Year NPV</th>
+                            <th>Description</th>
+                        </tr>
+                        <tr>
+                            <td>Reduced Incident Costs</td>
+                            <td>$800,000</td>
+                            <td>$3,032,000</td>
+                            <td>40% reduction in security incidents</td>
+                        </tr>
+                        <tr>
+                            <td>Regulatory Compliance</td>
+                            <td>$700,000</td>
+                            <td>$2,652,000</td>
+                            <td>Avoided fines and audit cost reduction</td>
+                        </tr>
+                        <tr>
+                            <td>Operational Efficiency</td>
+                            <td>$450,000</td>
+                            <td>$1,706,000</td>
+                            <td>Reduced downtime and automation</td>
+                        </tr>
+                        <tr>
+                            <td>Business Opportunities</td>
+                            <td>$1,000,000</td>
+                            <td>$1,284,000</td>
+                            <td>New business requiring certification</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="metrics-grid" style="margin-top: 20px;">
+                    <div class="metric-card">
+                        <h4>Total 5-Year Benefits</h4>
+                        <div class="metric-value">$8.67M</div>
+                    </div>
+                    <div class="metric-card">
+                        <h4>Net Present Value</h4>
+                        <div class="metric-value">$3.35M</div>
+                    </div>
+                    <div class="metric-card">
+                        <h4>ROI</h4>
+                        <div class="metric-value">62.9%</div>
+                    </div>
+                    <div class="metric-card">
+                        <h4>Payback Period</h4>
+                        <div class="metric-value">2.8 years</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="timeline-milestones" class="section">
+            <h2>18. Timeline and Milestones</h2>
+
+            <h3>Critical Success Factors</h3>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <h4>Executive Leadership</h4>
+                    <div class="metric-description">Visible management support and resource commitment</div>
+                </div>
+                <div class="metric-card">
+                    <h4>Change Management</h4>
+                    <div class="metric-description">Stakeholder engagement and cultural transformation</div>
+                </div>
+                <div class="metric-card">
+                    <h4>Technical Excellence</h4>
+                    <div class="metric-description">Proper implementation and integration of controls</div>
+                </div>
+                <div class="metric-card">
+                    <h4>Continuous Improvement</h4>
+                    <div class="metric-description">Ongoing enhancement and optimization processes</div>
+                </div>
+            </div>
+
+            <h3>Key Milestones and Deliverables</h3>
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>Milestone</th>
+                        <th>Target Date</th>
+                        <th>Status</th>
+                        <th>Key Deliverables</th>
+                        <th>Success Criteria</th>
+                    </tr>
+                    <tr>
+                        <td>Project Initiation Complete</td>
+                        <td>Month 1</td>
+                        <td><span class="control-status status-implemented">Complete</span></td>
+                        <td>Project charter, team formation, budget approval</td>
+                        <td>Executive sponsorship confirmed</td>
+                    </tr>
+                    <tr>
+                        <td>ISMS Scope Defined</td>
+                        <td>Month 2</td>
+                        <td><span class="control-status status-implemented">Complete</span></td>
+                        <td>Scope statement, asset inventory initiated</td>
+                        <td>Board-approved scope definition</td>
+                    </tr>
+                    <tr>
+                        <td>Risk Assessment Complete</td>
+                        <td>Month 4</td>
+                        <td><span class="control-status status-in-progress">In Progress</span></td>
+                        <td>Risk register, threat analysis, control gaps</td>
+                        <td>Management-approved risk treatment plan</td>
+                    </tr>
+                    <tr>
+                        <td>Policy Framework Established</td>
+                        <td>Month 6</td>
+                        <td><span class="control-status status-in-progress">In Progress</span></td>
+                        <td>Master policy, 8 domain policies, procedures</td>
+                        <td>Board-approved policy framework</td>
+                    </tr>
+                    <tr>
+                        <td>Controls Implementation Phase 1</td>
+                        <td>Month 9</td>
+                        <td><span class="control-status status-not-implemented">Planned</span></td>
+                        <td>Access controls, physical security, operations</td>
+                        <td>75% of critical controls implemented</td>
+                    </tr>
+                    <tr>
+                        <td>Controls Implementation Phase 2</td>
+                        <td>Month 12</td>
+                        <td><span class="control-status status-not-implemented">Planned</span></td>
+                        <td>All remaining controls, testing, validation</td>
+                        <td>95% of all applicable controls operational</td>
+                    </tr>
+                    <tr>
+                        <td>Internal Audit Program</td>
+                        <td>Month 14</td>
+                        <td><span class="control-status status-not-implemented">Planned</span></td>
+                        <td>Internal audits, findings resolution</td>
+                        <td>Zero critical audit findings</td>
+                    </tr>
+                    <tr>
+                        <td>Stage 1 Certification Audit</td>
+                        <td>Month 16</td>
+                        <td><span class="control-status status-not-implemented">Planned</span></td>
+                        <td>Documentation review, process validation</td>
+                        <td>Successful Stage 1 audit completion</td>
+                    </tr>
+                    <tr>
+                        <td>Stage 2 Certification Audit</td>
+                        <td>Month 17</td>
+                        <td><span class="control-status status-not-implemented">Planned</span></td>
+                        <td>Full ISMS assessment, control testing</td>
+                        <td>ISO 27001 certificate issuance</td>
+                    </tr>
+                    <tr>
+                        <td>Project Completion</td>
+                        <td>Month 18</td>
+                        <td><span class="control-status status-not-implemented">Planned</span></td>
+                        <td>Operational transition, lessons learned</td>
+                        <td>Successful handover to operations team</td>
+                    </tr>
+                </table>
+            </div>
+
+            <h3>Project Risk Management</h3>
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>Risk</th>
+                        <th>Probability</th>
+                        <th>Impact</th>
+                        <th>Score</th>
+                        <th>Mitigation Strategy</th>
+                    </tr>
+                    <tr>
+                        <td>Resource unavailability during peak implementation</td>
+                        <td>High</td>
+                        <td>High</td>
+                        <td>16</td>
+                        <td>Cross-training, external support, flexible scheduling</td>
+                    </tr>
+                    <tr>
+                        <td>Regulatory changes during implementation</td>
+                        <td>Medium</td>
+                        <td>High</td>
+                        <td>12</td>
+                        <td>Regular monitoring, adaptive planning, expert consultation</td>
+                    </tr>
+                    <tr>
+                        <td>Stakeholder resistance to change</td>
+                        <td>High</td>
+                        <td>Medium</td>
+                        <td>12</td>
+                        <td>Change management, communication, training</td>
+                    </tr>
+                    <tr>
+                        <td>Budget overruns due to scope creep</td>
+                        <td>Medium</td>
+                        <td>High</td>
+                        <td>12</td>
+                        <td>Strict change control, regular monitoring, contingency</td>
+                    </tr>
+                    <tr>
+                        <td>Technology integration challenges</td>
+                        <td>Medium</td>
+                        <td>Medium</td>
+                        <td>9</td>
+                        <td>Proof of concept, vendor support, fallback options</td>
+                    </tr>
+                </table>
+            </div>
+
+            <h3>Success Measurement KPIs</h3>
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>KPI Category</th>
+                        <th>Metric</th>
+                        <th>Target</th>
+                        <th>Current Status</th>
+                        <th>RAG</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Timeline</strong></td>
+                        <td>On-time milestone delivery</td>
+                        <td>95%</td>
+                        <td>92%</td>
+                        <td><span class="status-indicator status-amber"></span> Amber</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Budget</strong></td>
+                        <td>Budget variance</td>
+                        <td>±5%</td>
+                        <td>+3%</td>
+                        <td><span class="status-indicator status-green"></span> Green</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Quality</strong></td>
+                        <td>Deliverable acceptance rate</td>
+                        <td>100%</td>
+                        <td>98%</td>
+                        <td><span class="status-indicator status-green"></span> Green</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Stakeholder</strong></td>
+                        <td>Satisfaction score (1-10)</td>
+                        <td>≥8</td>
+                        <td>8.2</td>
+                        <td><span class="status-indicator status-green"></span> Green</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Risk</strong></td>
+                        <td>High risks with overdue mitigation</td>
+                        <td>0</td>
+                        <td>1</td>
+                        <td><span class="status-indicator status-amber"></span> Amber</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Conclusion</h2>
+            
+            <div class="highlight-box">
+                <p>This comprehensive ISO 27001 implementation plan for Metropolitan Trust Bank represents a strategic investment in information security maturity and operational resilience. The 18-month implementation timeline, supported by a $5.3 million investment, will establish a robust Information Security Management System that addresses the unique challenges and regulatory requirements of the banking industry.</p>
+            </div>
+
+            <h3>Expected Outcomes</h3>
+            <ul>
+                <li><strong>ISO 27001:2022 certification achievement</strong> - Demonstrating world-class security management</li>
+                <li><strong>40% reduction in security incidents</strong> within 12 months of full implementation</li>
+                <li><strong>Enhanced regulatory compliance</strong> and audit readiness across all banking regulations</li>
+                <li><strong>Improved customer trust</strong> and competitive positioning in the financial services market</li>
+                <li><strong>Strong foundation</strong> for future security initiatives and digital transformation</li>
+            </ul>
+
+            <h3>Next Steps</h3>
+            <div class="phase-timeline">
+                <div class="phase-item">
+                    <div class="phase-title">Immediate Actions (Next 30 Days)</div>
+                    <p>Executive approval, resource allocation, detailed project planning</p>
+                </div>
+                <div class="phase-item">
+                    <div class="phase-title">Short-term Goals (Months 1-3)</div>
+                    <p>Team establishment, governance structure, initial risk assessment</p>
+                </div>
+                <div class="phase-item">
+                    <div class="phase-title">Medium-term Objectives (Months 4-12)</div>
+                    <p>Control implementation, training programs, operational integration</p>
+                </div>
+                <div class="phase-item">
+                    <div class="phase-title">Long-term Vision (Months 13-18+)</div>
+                    <p>Certification achievement, continuous improvement, operational excellence</p>
+                </div>
+            </div>
+
+            <div class="budget-summary">
+                <h3>Investment Summary</h3>
+                <div class="metrics-grid">
+                    <div class="metric-card" style="background: var(--white); color: var(--primary-black); border: 2px solid var(--white);">
+                        <h4>Total Investment</h4>
+                        <div class="metric-value">$5.33M</div>
+                        <div class="metric-description">18-month implementation</div>
+                    </div>
+                    <div class="metric-card" style="background: var(--white); color: var(--primary-black); border: 2px solid var(--white);">
+                        <h4>5-Year NPV</h4>
+                        <div class="metric-value">$3.35M</div>
+                        <div class="metric-description">Net present value</div>
+                    </div>
+                    <div class="metric-card" style="background: var(--white); color: var(--primary-black); border: 2px solid var(--white);">
+                        <h4>ROI</h4>
+                        <div class="metric-value">62.9%</div>
+                        <div class="metric-description">Return on investment</div>
+                    </div>
+                    <div class="metric-card" style="background: var(--white); color: var(--primary-black); border: 2px solid var(--white);">
+                        <h4>Annual Savings</h4>
+                        <div class="metric-value">$1.95M</div>
+                        <div class="metric-description">Post-implementation</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p><strong>Document Prepared By:</strong> Information Security Implementation Team</p>
+            <p><strong>Metropolitan Trust Bank</strong></p>
+            <p>Date: September 5, 2025 | Version: 1.0 | Next Review: March 5, 2026</p>
+            <p style="margin-top: 15px; font-style: italic;">
+                This document contains confidential and proprietary information of Metropolitan Trust Bank<br>
+                and is intended solely for internal use in support of the ISO 27001 implementation project.
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // Add interactive functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scrolling for TOC links
+            const tocLinks = document.querySelectorAll('.toc a');
+            tocLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Add expandable functionality to sections
+            const sections = document.querySelectorAll('.section h3');
+            sections.forEach(heading => {
+                heading.classList.add('expandable');
+                heading.innerHTML += ' <span class="expand-indicator">▼</span>';
+                
+                const content = heading.nextElementSibling;
+                if (content) {
+                    content.classList.add('expandable-content');
+                }
+
+                heading.addEventListener('click', function() {
+                    this.classList.toggle('expanded');
+                    const content = this.nextElementSibling;
+                    if (content && content.classList.contains('expandable-content')) {
+                        if (this.classList.contains('expanded')) {
+                            content.style.display = 'block';
+                        } else {
+                            content.style.display = 'none';
+                        }
+                    }
+                });
+            });
+
+            // Add hover effects to metric cards
+            const metricCards = document.querySelectorAll('.metric-card');
+            metricCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px) scale(1.02)';
+                    this.style.transition = 'all 0.3s ease';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+
+            // Add print functionality
+            const printButton = document.createElement('button');
+            printButton.textContent = 'Print Document';
+            printButton.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 10px 20px;
+                background: var(--primary-black);
+                color: var(--white);
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+                z-index: 1000;
+                transition: all 0.3s ease;
+            `;
+            
+            printButton.addEventListener('click', function() {
+                window.print();
+            });
+            
+            printButton.addEventListener('mouseenter', function() {
+                this.style.background = var(--secondary-black);
+                this.style.transform = 'scale(1.05)';
+            });
+            
+            printButton.addEventListener('mouseleave', function() {
+                this.style.background = var(--primary-black);
+                this.style.transform = 'scale(1)';
+            });
+            
+            document.body.appendChild(printButton);
+
+            // Add progress indicator for reading
+            const progressBar = document.createElement('div');
+            progressBar.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 0%;
+                height: 4px;
+                background: linear-gradient(90deg, var(--primary-black), var(--secondary-black));
+                z-index: 1000;
+                transition: width 0.3s ease;
+            `;
+            document.body.appendChild(progressBar);
+
+            window.addEventListener('scroll', function() {
+                const scrollTop = window.pageYOffset;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrollPercent = (scrollTop / docHeight) * 100;
+                progressBar.style.width = scrollPercent + '%';
+            });
+
+            // Add back-to-top button
+            const backToTopButton = document.createElement('button');
+            backToTopButton.innerHTML = '↑';
+            backToTopButton.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+                background: var(--primary-black);
+                color: var(--white);
+                border: none;
+                border-radius: 50%;
+                cursor: pointer;
+                font-size: 24px;
+                font-weight: bold;
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+                z-index: 1000;
+            `;
+            
+            backToTopButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            document.body.appendChild(backToTopButton);
+
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.style.opacity = '1';
+                    backToTopButton.style.visibility = 'visible';
+                } else {
+                    backToTopButton.style.opacity = '0';
+                    backToTopButton.style.visibility = 'hidden';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+            
